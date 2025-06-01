@@ -79,7 +79,7 @@ jobs:
       with:
         python-version: '3.11'
     - name: install minimal requirements
-      run: brew install meson ninja pkg-config cmake llvm
+      run: brew install meson ninja pkg-config cmake llvm@15
     - uses: BSFishy/meson-build@v1.0.3
       with:
         action: build
