@@ -16,8 +16,8 @@ jobs:
     env:
       CI_SEED: 1234567891  # cache buster
       GITHUB_WORKSPACE: ${{ github.workspace }}
-      LDFLAGS: "-L/opt/homebrew/opt/llvm/lib"
-      CPPFLAGS: "-I/opt/homebrew/opt/llvm/include"
+      LDFLAGS: "-L/opt/homebrew/opt/llvm@15/lib"
+      CPPFLAGS: "-I/opt/homebrew/opt/llvm@15/include"
     steps:
     - name: Check variables
       run: |
@@ -65,6 +65,9 @@ jobs:
         echo "github.event.organization: ${{ github.event.organization }}"
         echo "github.event.repository: ${{ github.event.repository }}"
         echo "github.event.sender: ${{ github.event.sender }}"        
+    - name: ls folders
+      run: | 
+       ls -alfR /opt/homebrew/opt/
     - name: homebrew
       run: |
           # temporarily disabled, because it always fails these days.
