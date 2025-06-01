@@ -77,7 +77,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Add bin directory of dependencies to system PATH environment variable
-      run: echo /opt/homebrew/opt/llvm/bin >> ${{ github.path }}
+      run: echo /opt/homebrew/opt/llvm@15/bin >> ${{ github.path }}
     - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
