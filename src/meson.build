@@ -11,6 +11,8 @@ swiftdemangler_sources = [
     'Portability.cpp',
     'Punycode.cpp',
     'Remangler.cpp',
+    'MangleHack.cpp',
+    'SwiftDemangle.cpp',
 ]
 
 swift_demangler_defines = [
@@ -34,10 +36,30 @@ swift_demangler_lib = static_library(
     cpp_args: swift_demangler_defines,
 )
 
+# Define the shared library
+swift_demangler_shared = shared_library(
+    'swiftdemangler',
+    swiftdemangler_sources,
+    dependencies: swift_demangler_deps,
+    include_directories: inc,
+    install: true,
+    cpp_args: swift_demangler_defines,
+)
+
 swift_demangler_dep = declare_dependency(
     include_directories: include_dir,
     link_with: swift_demangler_lib,
     dependencies: swift_demangler_deps,
 )
 
-pkg.generate(swift_demangler_lib)
+pkg.generate(swift_demangler_lib, name: 'swiftdemangler-static')
+
+# Declare dependency for the shared library
+swift_demangler_shared_dep = declare_dependency(
+    include_directories: include_dir,
+    link_with: swift_demangler_shared,
+    dependencies: swift_demangler_deps,
+)
+
+# Generate pkg-config for the shared library
+pkg.generate(swift_demangler_shared, name: 'swiftdemangler')

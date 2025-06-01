@@ -2,6 +2,7 @@
  * demangle.h
  *
  * Copyright 2023 JCWasmx86 <JCWasmx86@t-online.de>
+ * Copyright 2025 mahmoudimus <mahmoudimus.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -36,6 +37,20 @@ char *swift_demangle (const char *mangledName,
                       char       *outputBuffer,
                       size_t     *outputBufferSize,
                       uint32_t    flags);
+
+size_t swift_demangle_getDemangledName(const char *MangledName,
+                                       char *OutputBuffer,
+                                       size_t Length);
+
+size_t swift_demangle_getSimplifiedDemangledName(const char *MangledName,
+                                                 char *OutputBuffer,
+                                                 size_t Length);
+
+size_t swift_demangle_getModuleName(const char *MangledName,
+                                    char *OutputBuffer,
+                                    size_t Length);
+
+int swift_demangle_hasSwiftCallingConvention(const char *MangledName);                      
 #ifdef __cplusplus
 }
 #endif
