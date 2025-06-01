@@ -18,6 +18,11 @@ jobs:
       CPPFLAGS: "-I/opt/homebrew/opt/llvm/include"
       PATH: "/opt/homebrew/opt/llvm/bin:$PATH"
     steps:
+    - name: homebrew
+      run: |
+          # temporarily disabled, because it always fails these days.
+          # brew update
+          brew install cask git        
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0 
@@ -25,11 +30,6 @@ jobs:
     - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
-    - name: homebrew
-      run: |
-          # temporarily disabled, because it always fails these days.
-          # brew update
-          brew install cask
     - name: install minimal requirements
       run: brew install meson ninja pkg-config cmake llvm
     - uses: BSFishy/meson-build@v1.0.3
