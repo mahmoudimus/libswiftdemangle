@@ -1,5 +1,8 @@
 name: libswiftdemangle builder
-on: [push, pull_request, workflow_dispatch]
+on: 
+  - push
+  - pull_request
+  - workflow_dispatch
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
@@ -17,7 +20,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0        
+        fetch-depth: 0 
+        ref: ${{ github.event.pull_request.head.sha }}       
     - uses: actions/setup-python@v5
       with:
         python-version: '3.11'
