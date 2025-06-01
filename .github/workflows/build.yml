@@ -86,8 +86,13 @@ jobs:
     - uses: BSFishy/meson-build@v1.0.3
       with:
         action: build
+    - name: ls build
+      run: | 
+       ls -alfR .
+       ls -alfR build
+       ls -alfR src
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: libswiftdemangle-macos.zip
-        path: ${{ github.workspace }}/artifacts
+        path: ${{ github.workspace }}/src/libswiftdemangler.a
