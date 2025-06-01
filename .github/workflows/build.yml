@@ -88,8 +88,8 @@ jobs:
         action: build
     - name: ls build
       run: | 
-       ls -alfR .
-       ls -alfR build
+       ls -alfR build;
+       echo "======";
        ls -alfR src
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
