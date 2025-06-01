@@ -5,7 +5,7 @@ project(
     meson_version: '>= 0.62.0',
     default_options: [
         'werror=false',
-        'cpp_std=gnu++2a',
+        'cpp_std=gnu++17',
     ],
 )
 pkg = import('pkgconfig')
