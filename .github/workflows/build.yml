@@ -1,0 +1,35 @@
+name: libswiftdemangle builder
+on: [push, pull_request, workflow_dispatch]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  libswiftdemangle-macos:
+    runs-on: macos-latest
+    env:
+      CI_SEED: 1234567891  # cache buster
+      GITHUB_WORKSPACE: ${{ github.workspace }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0        
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: homebrew
+      run: |
+          # temporarily disabled, because it always fails these days.
+          # brew update
+          brew install cask
+    - name: install minimal requirements
+      run: brew install meson ninja pkg-config cmake llvm
+    - uses: BSFishy/meson-build@v1.0.3
+      with:
+        action: build
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libswiftdemangle-macos.zip
+        path: ${{ github.workspace }}/artifacts
