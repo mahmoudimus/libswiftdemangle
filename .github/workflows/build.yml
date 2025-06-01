@@ -11,6 +11,9 @@ jobs:
     env:
       CI_SEED: 1234567891  # cache buster
       GITHUB_WORKSPACE: ${{ github.workspace }}
+      LDFLAGS: "-L/opt/homebrew/opt/llvm/lib"
+      CPPFLAGS: "-I/opt/homebrew/opt/llvm/include"
+      PATH: "/opt/homebrew/opt/llvm/bin:$PATH"
     steps:
     - uses: actions/checkout@v4
       with:
