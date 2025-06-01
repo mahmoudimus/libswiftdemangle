@@ -52,4 +52,14 @@ swift_demangler_dep = declare_dependency(
     dependencies: swift_demangler_deps,
 )
 
-pkg.generate(swift_demangler_lib)
+pkg.generate(swift_demangler_lib, name: 'swiftdemangler-static')
+
+# Declare dependency for the shared library
+swift_demangler_shared_dep = declare_dependency(
+    include_directories: include_dir,
+    link_with: swift_demangler_shared,
+    dependencies: swift_demangler_deps,
+)
+
+# Generate pkg-config for the shared library
+pkg.generate(swift_demangler_shared, name: 'swiftdemangler')
