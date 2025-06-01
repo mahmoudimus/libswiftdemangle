@@ -11,7 +11,7 @@ swiftdemangler_sources = [
     'Portability.cpp',
     'Punycode.cpp',
     'Remangler.cpp',
-    'ManglingUtils.cpp',
+    'MangleHack.cpp',
     'SwiftDemangle.cpp',
 ]
 
